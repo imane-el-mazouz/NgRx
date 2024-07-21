@@ -1,0 +1,19 @@
+<main class="main">
+  <div>
+    <button (click)="addTask()">Add Task</button>
+  </div>
+
+  <ul>
+    <li *ngFor="let task of tasks$ | async">
+      {{ task.description }}
+      <button (click)="removeTask(task.id)">Remove</button>
+      <button (click)="updateTask(task)">
+        {{ task.completed ? 'Mark as Incomplete' : 'Mark as Complete' }}
+      </button>
+    </li>
+  </ul>
+
+  <div *ngIf="error$ | async as error">
+    <p>Error: {{ error }}</p>
+  </div>
+</main>
