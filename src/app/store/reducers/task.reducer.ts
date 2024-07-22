@@ -1,45 +1,9 @@
-// src/app/store/reducers/task.reducer.ts
-import { createReducer, on, Action } from '@ngrx/store';
-import { Task } from '../../model/task.model';
-import {
-  addTaskSuccess,
-  removeTaskSuccess,
-  updateTaskSuccess,
-  loadTasksSuccess,
-  loadTasksFailure,
-  addTaskFailure,
-  removeTaskFailure,
-  updateTaskFailure
-} from '../actions/task.actions';
+import { createReducer, on } from '@ngrx/store';
+import { loadTasksSuccess, addTask } from '../actions/task.actions';
+import { TaskState, initialTaskState } from '../../model/task.state';
 
-export interface TaskState {
-  tasks: Task[];
-  error: string | null;
-}
-
-export const initialState: TaskState = {
-  tasks: [],
-  error: null,
-};
-
-const _taskReducer = createReducer(
-  initialState,
+export const taskReducer = createReducer(
+  initialTaskState,
   on(loadTasksSuccess, (state, { tasks }) => ({ ...state, tasks })),
-  on(addTaskSuccess, (state, { task }) => ({ ...state, tasks: [...state.tasks, task] })),
-  on(removeTaskSuccess, (state, { id }) => ({ ...state, tasks: state.tasks.filter(task => task.id !== id) })),
-  on(updateTaskSuccess, (state, { task }) => ({
-    ...state,
-    tasks: state.tasks.map(t => (t.id === task.id ? task : t)),
-  })),
-  on(loadTasksFailure, addTaskFailure, updateTaskFailure, (state, { error }) => ({
-    ...state,
-    error,
-  }))
+  on(addTask, (state, { task }) => ({ ...state, tasks: [...state.tasks, task] }))
 );
-
-export function taskReducer(state: TaskState | undefined, action: Action) {
-  return _taskReducer(state, action);
-}
-
-export class TaskReducer {
-}

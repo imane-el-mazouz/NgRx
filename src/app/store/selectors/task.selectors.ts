@@ -1,14 +1,12 @@
-import { createSelector } from '@ngrx/store';
-import { TaskState } from '../reducers/task.reducer';
+// src/app/store/selectors/task.selectors.ts
+import { createFeatureSelector, createSelector } from '@ngrx/store';
+import { TaskState } from '../../model/task.state';
 
-export const selectTaskState = (state: any) => state.tasks;
+export const selectTaskFeature = createFeatureSelector<TaskState>('tasks');
 
 export const selectTasks = createSelector(
-  selectTaskState,
+  selectTaskFeature,
   (state: TaskState) => state.tasks
 );
 
-export const selectError = createSelector(
-  selectTaskState,
-  (state: TaskState) => state.error
-);
+

@@ -1,5 +1,13 @@
-<ul>
-  <li *ngFor="let task of tasks$ | async">
-    {{ task.description }}
-  </li>
-</ul>
+<div>
+  <h2>Task List</h2>
+  <div>
+    <h3>New Task</h3>
+    <input [(ngModel)]="newTaskDescription" placeholder="Enter task description" />
+    <button (click)="addTask()">Add Task</button>
+  </div>
+
+  <div *ngIf="(tasks$ | async)?.length === 0">
+    <p>No tasks available.</p>
+  </div>
+
+</div>
