@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { Task } from './model/task.model'; // Assurez-vous que ce chemin est correct
-import { addTask, removeTask, updateTask, loadTasks } from './store/actions/task.actions'; // Chemin correct
-import { selectTasks, selectError } from './store/selectors/task.selectors'; // Chemin correct
+import { Task } from './model/task.model';
+import { addTask, removeTask, updateTask, loadTasks } from './store/actions/task.actions';
+import { selectTasks, selectError } from './store/selectors/task.selectors';
+import {AsyncPipe, NgForOf, NgIf} from "@angular/common";
 
 @Component({
   selector: 'app-root',
@@ -11,6 +12,11 @@ import { selectTasks, selectError } from './store/selectors/task.selectors'; // 
   styleUrls: ['./app.component.scss'],
   standalone: true,
 
+  imports: [
+    AsyncPipe,
+    NgForOf,
+    NgIf
+  ]
 })
 export class AppComponent implements OnInit {
   tasks$: Observable<Task[]> = this.store.select(selectTasks);

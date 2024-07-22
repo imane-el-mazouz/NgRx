@@ -8,7 +8,7 @@ export const routes: Routes = [
   { path: 'tasks', component: TaskListComponent },
 
 
-  { path: '/tasks', redirectTo: '' }
+  { path: 'tasks', redirectTo: '' }
 ];
 
 @NgModule({
